@@ -1,0 +1,51 @@
+﻿<Window x:Class="AnketaSearch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Поисковая система анкет" Height="550" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="BtnLoadFile" Content=" Загрузить файл" Width="140" Height="30" 
+                    Margin="0,0,10,0" Click="BtnLoadFile_Click" Background="#4CAF50" Foreground="White"/>
+            <TextBox x:Name="TxtSearch" Width="350" Height="30" Margin="0,0,10,0" 
+                     VerticalContentAlignment="Center" Text="Введите ФИО, город, образование..."/>
+            <Button x:Name="BtnSearch" Content="🔍 Поиск" Width="90" Height="30" 
+                    Margin="0,0,10,0" Click="BtnSearch_Click" Background="#2196F3" Foreground="White"/>
+            <Button x:Name="BtnClear" Content="🔄 Сброс" Width="90" Height="30" 
+                    Click="BtnClear_Click" Background="#FF9800" Foreground="White"/>
+        </StackPanel>
+        
+        <TextBlock Grid.Row="1" x:Name="LblStatus" Margin="0,0,0,8" Foreground="#666" 
+                   FontSize="12" Text="Файл не загружен. Нажмите 'Загрузить файл'."/>
+
+        <DataGrid Grid.Row="2" x:Name="DgAnkety" AutoGenerateColumns="False" IsReadOnly="True" 
+                  SelectionMode="Single" CanUserAddRows="False" HeadersVisibility="Column"
+                  Background="White" BorderBrush="#CCC" RowHeight="28"
+                  CanUserSortColumns="True" Sorting="DgAnkety_Sorting" 
+                  SelectionChanged="DgAnkety_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" SortMemberPath="Id" Width="50"/>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}" SortMemberPath="Fio" Width="*"/>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate}" SortMemberPath="BirthDate" Width="110"/>
+                <DataGridTextColumn Header="Город" Binding="{Binding City}" SortMemberPath="City" Width="130"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" SortMemberPath="Phone" Width="120"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" SortMemberPath="Email" Width="160"/>
+                <DataGridTextColumn Header="Образование" Binding="{Binding Education}" SortMemberPath="Education" Width="140"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="3" BorderBrush="#CCC" BorderThickness="1" Background="White" 
+                Padding="10" Margin="0,10,0,0" CornerRadius="4">
+            <TextBlock x:Name="TxtDetails" Text="Выберите анкету для просмотра полной информации..." 
+                       Foreground="#555" FontSize="13" TextWrapping="Wrap"/>
+        </Border>
+    </Grid>
+</Window>
